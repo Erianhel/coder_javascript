@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+
+    <title>Desafio incorporar eventos</title>
+</head>
+<body>
+
+    <section class="container">
+        <h1>Cotizador Seguros</h1>
+
+        <p>
+            Ingrese la opcion del producto que desea asegurar: 
+        </p>
+            <ol>
+                <li>Celular - suma a asegurar: entre $50.000 y $200.000</li>
+                <li>Bolso - suma a asegurar: entre $10.000 y $80.000</li>
+                <li>Bicicleta - suma a asegurar: entre $50.000 y $150.000</li>
+                <li>Mis seguros</li>
+            </ol>
+
+        <div class="input-group mb-3 row">
+    <form id="enviar">
+            <input type="text" class="form-control col-12" placeholder="Opcion de seguro" aria-label="Opcion de seguro" aria-describedby="boton">
+            <input type="text" class="form-control col-12" placeholder="Suma a asegurar" aria-label="Suma a asegurar" aria-describedby="boton">
+        </div>
+        <div class="">
+            <input type="submit" id="boton" value="Enviar">
+        </div>
+    </form>
+
+    <h2>Seguros Contratados</h2>
+
+    <div class="card" style="width: 18rem;" id="tuseguros">
+        <!-- <ul class="list-group list-group-flush">
+          <li class="list-group-item">An item</li>
+        </ul> -->
+    
+    </div>
+     
+    </section>
+
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+    <script src="./index.js"></script>
+</body>
+</html>
