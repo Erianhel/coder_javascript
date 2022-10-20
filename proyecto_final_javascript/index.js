@@ -36,6 +36,7 @@ enviar.addEventListener("submit", (e) => {
     e.preventDefault();
     let inputs = e.target.children;
     menu(inputs[0].value, inputs[1].value, inputs[2].value);
+    enviar.reset();
 });
 
 
@@ -179,10 +180,6 @@ function menu (opcion, monto, email){
         case 4:
                 verSegurosContratados(misSeguros);
             break;
-        case 5:
-                Swal.fire('Gracias por utilizar nuestro cotizador');
-            break;
-
         default:
             Swal.fire({
                 icon: 'error',
@@ -217,9 +214,9 @@ function verSegurosContratados(misSeguros){
     
         ul.append(li);
         card.append(ul);
+        
 
         let boton = document.getElementById(`eliminar${item.id}`);
-        //boton.addEventListener("click", () => eliminarSeguro(item.id));
         boton.addEventListener("click", () => {
             Swal.fire({
               title: "Está seguro que desea eliminar el seguro?",
