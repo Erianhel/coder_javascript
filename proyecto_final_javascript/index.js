@@ -8,26 +8,6 @@ class Seguro {
 }
 
 let misSeguros = [];
-let botonEliminarTodo = document.getElementById("eliminarTodo");
-
-botonEliminarTodo.addEventListener("click", () => {
-    Swal.fire({
-      title: "Está seguro de eliminar todos los seguros?",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonText: "Sí, seguro",
-      cancelButtonText: "No, no quiero",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        eliminarTodo();
-        Swal.fire({
-          title: "Eliminado!",
-          icon: "success",
-          text: "Los productos han sido eliminados",
-        });
-      };
-    });
-  }); 
 
 const iva = 1.21;
 let enviar = document.getElementById("enviar");
@@ -147,7 +127,7 @@ function menu (opcion, monto, email){
                     text: "El valor que debe abonar es: $ " + calcularPrecioAPagar(monto),
                   });
 
-                  let data = {
+                  /* let data = {
                     service_id: 'service_g5p6lvt',
                     template_id: 'template_bk50r6d',
                     user_id: 'GISgVBXhRR0-yU2EY',
@@ -167,7 +147,7 @@ function menu (opcion, monto, email){
                     console.log('Mail enviado!');
                 }).catch(function(error) {
                 console.log('Hubo un problema con la petición Fetch:' + error.message);
-                });
+                }); */
 
             }else {
                 Swal.fire({
@@ -198,11 +178,44 @@ function calcularPrecioAPagar(producto) {
 
 
 function verSegurosContratados(misSeguros){
-
-    let ul = document.createElement("ul");
-    ul.className = "list-group list-group-flush";
     let card = document.getElementById("tuseguros");
     card.innerHTML = "";
+    card.className = "card";
+
+    if(misSeguros === null){
+        let segurosCont = document.getElementById("segurosContratados");
+        segurosCont.innerHTML = "";
+    }else{
+        let segurosCont = document.getElementById("segurosContratados");
+        segurosCont.innerHTML = `<h2 class="mt-4">Seguros Contratados</h2>
+        <input type="submit" class="btn btn-info mt-3 mb-3" id="eliminarTodo" value="Eliminar todo">`;
+
+    let botonEliminarTodo = document.getElementById("eliminarTodo");
+
+    botonEliminarTodo.addEventListener("click", () => {
+        card.className = "";
+        Swal.fire({
+        title: "Está seguro de eliminar todos los seguros?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Sí, seguro",
+        cancelButtonText: "No, no quiero",
+        }).then((result) => {
+        if (result.isConfirmed) {
+            eliminarTodo();
+            Swal.fire({
+            title: "Eliminado!",
+            icon: "success",
+            text: "Los productos han sido eliminados",
+            });
+        };
+        });
+    }); 
+
+    }
+    
+    let ul = document.createElement("ul");
+    ul.className = "list-group list-group-flush";
     console.log(misSeguros);
 
     misSeguros.forEach(item => {
@@ -250,7 +263,7 @@ function eliminarSeguro(idSeguro){
 function eliminarTodo(){
     localStorage.clear();
     misSeguros = [];
-    verSegurosContratados(misSeguros);
+    verSegurosContratados();
 }
 
 
