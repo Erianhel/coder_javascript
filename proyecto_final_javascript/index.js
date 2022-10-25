@@ -7,20 +7,8 @@ class Seguro {
 
 }
 
-let misSeguros = [];
-
-const iva = 1.21;
-let enviar = document.getElementById("enviar");
-console.log(enviar);
-enviar.addEventListener("submit", (e) => {
-    e.preventDefault();
-    let inputs = e.target.children;
-    menu(inputs[0].value, inputs[1].value, inputs[2].value);
-    enviar.reset();
-});
-
-
-function menu (opcion, monto, email){
+const menu = (opcion, monto, email) =>{
+    let misSeguros = [];
     switch (parseInt(opcion)) {
         case 1:
             if (monto >= 50000 && monto <= 200000) {
@@ -158,7 +146,7 @@ function menu (opcion, monto, email){
             }
             break;
         case 4:
-                verSegurosContratados(misSeguros);
+                verSegurosContratados();
             break;
         default:
             Swal.fire({
@@ -171,20 +159,21 @@ function menu (opcion, monto, email){
     
 }
 
-function calcularPrecioAPagar(producto) {
+const calcularPrecioAPagar = (producto) =>{
     let premio = (producto*0.05) * iva;
         return premio;
 }
 
 
-function verSegurosContratados(misSeguros){
+const verSegurosContratados = () =>{
+    let misSeguros = JSON.parse(localStorage.getItem("misSeguros"));
     let card = document.getElementById("tuseguros");
     card.innerHTML = "";
     card.className = "card";
 
     if(misSeguros === null){
         let segurosCont = document.getElementById("segurosContratados");
-        segurosCont.innerHTML = "";
+        segurosCont.innerHTML = `<h3 class="mt-4">No tiene seguros contratados</h3>`;
     }else{
         let segurosCont = document.getElementById("segurosContratados");
         segurosCont.innerHTML = `<h2 class="mt-4">Seguros Contratados</h2>
@@ -252,7 +241,7 @@ function verSegurosContratados(misSeguros){
 
 }
 
-function eliminarSeguro(idSeguro){
+const eliminarSeguro = (idSeguro) =>{
     misSeguros = JSON.parse(localStorage.getItem("misSeguros"));
     let aux = misSeguros.filter((item) => item.id != idSeguro);
     misSeguros = aux;
@@ -260,11 +249,25 @@ function eliminarSeguro(idSeguro){
     verSegurosContratados(misSeguros);
 }
 
-function eliminarTodo(){
+const eliminarTodo = () =>{
     localStorage.clear();
-    misSeguros = [];
     verSegurosContratados();
 }
+
+/* --------------------------------------------------------------------------------------------------------- */
+const iva = 1.21;
+let enviar = document.getElementById("enviar");
+
+
+enviar.addEventListener("submit", (e) => {
+    e.preventDefault();
+    let inputs = e.target.children;
+    menu(inputs[0].value, inputs[1].value, inputs[2].value);
+    enviar.reset();
+});
+
+
+
 
 
 
